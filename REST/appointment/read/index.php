@@ -11,10 +11,20 @@ $params = [
 
 $appointments = new Appointment($db_connection,null);
 
-
-
 header("Content-Type: application/json");
-echo json_encode(["success"=>"true","appointments"=>$appointments->getAll()]);
+if($_POST['getAllData']=="true"){
+    $data = $appointments->getAllAppointments();
+    $aux = [];
+    foreach($data as $row){
+        $row['actions']="";
+        $aux[]=$row;
+    }
+    echo json_encode(['success'=>"true","appointments"=>$aux]);
+}else{
+    echo json_encode(["success"=>"true","appointments"=>$appointments->getAll()]);
+    
+}
+
 
      
 

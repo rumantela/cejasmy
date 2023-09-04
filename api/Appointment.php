@@ -116,9 +116,26 @@ class Appointment {
     public function getAll() {
         $conn = new mysqli($this->db['db_server'],$this->db['db_user'],$this->db['db_password'],$this->db['db_name']);
         $query = "SELECT a.date_upd, c.firstname, a.turn FROM appointments a LEFT JOIN customers c ON a.id_customer=c.id_customer";
+        
         $result = $conn->query($query);
         $appointments = [];
+        if(isset($result)){
+
+            while ($row = $result->fetch_assoc()) {
+                $appointments[] = $row;
+            }
+            $conn->close();
+            return $appointments;
+        }
+        return $appointments;
+
+    }
+    public function getAllAppointments() {
+        $conn = new mysqli($this->db['db_server'],$this->db['db_user'],$this->db['db_password'],$this->db['db_name']);
+        $query = "SELECT a.*, c.firstname, c.lastname FROM appointments a INNER JOIN customers c ON a.id_customer=c.id_customer";
         
+        $result = $conn->query($query);
+        $appointments = [];
         if(isset($result)){
 
             while ($row = $result->fetch_assoc()) {
@@ -131,10 +148,10 @@ class Appointment {
 
     }
 
-    public function getAllMyAppointments() {
+    public function getAllMyAppointments($email) {
         $conn = new mysqli($this->db['db_server'],$this->db['db_user'],$this->db['db_password'],$this->db['db_name']);
         var_dump($conn);
-        $query = "SELECT a.date_upd, c.firstname, a.turn FROM appointments a LEFT JOIN customers c ON a.id_customer=c.id_customer";
+        $query = "SELECT a.date_upd, c.firstname, a.turn FROM appointments a LEFT JOIN customers c ON a.id_customer=c.id_customer WHERE a.email='".$email."'";
         $result = $conn->query($query);
         $appointments = [];
         if(isset($result)){

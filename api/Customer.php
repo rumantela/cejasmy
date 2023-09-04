@@ -112,6 +112,12 @@ class Customer{
             return false;
         }
     }
+    public function getAllCustomers(){
+        $sql = "
+            SELECT * FROM customers;
+        ";
+        return $this->db->query($sql)->fetchAll();
+    }
 
 
     // Getter setters

@@ -83,7 +83,10 @@ class Order {
     }
 
     public function getAllOrders() {
-        $sql = "SELECT * FROM orders";
+        $sql = "SELECT o.*, p.*, c.* FROM orders o INNER JOIN order_details od ON od.id_order=o.id_order
+            INNER JOIN products p ON p.id_product=od.id_product
+            INNER JOIN customers c ON c.id_customer=o.id_customer
+        ";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -5,9 +5,7 @@
 
 include __DIR__.'/AuthManager.php';
 include __DIR__.'/DB.php';
-require('PHPMailer.php');
-require('PHPMailer.php');
-
+require('PHPMailer/class.phpmailer.php');
 
 class Login
 {
@@ -50,7 +48,7 @@ class Login
 
             try {
                 //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
                 $mail->Host       = 'smtp.hostalia.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
