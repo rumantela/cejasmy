@@ -44,32 +44,7 @@ class Login
         //var_dump($result);
         if($result){
 
-            $mail = new PHPMailer();
-
-            try {
-                //Server settings
-                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.hostalia.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'cejasmy@hostalia.com';                     //SMTP username
-                $mail->Password   = '682130633557bB$';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             
-                //Recipients
-                $mail->setFrom('webmaster@cejasmy.com', 'CejasMy');
-                $mail->addReplyTo('webmaster@cejasmy.com', 'Information');
-            
-            
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Recuperación de contraseña';
-                $mail->Body    = 'Pincha en el siguiente enlace';
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-            
-                $mail->send();
-                echo 'Message has been sent';
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
